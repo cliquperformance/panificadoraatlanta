@@ -82,29 +82,29 @@ body {
     </style>
 </head>
 <body class="bg-amber-50 pt-24">
-    <header class="fixed w-full bg-white shadow-md z-50 top-0 left-0">
+    <header class="fixed w-full backdrop-blur-md bg-white/70 z-50 top-0 left-0 transition-all shadow-sm">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center">
-            <img src="img/logo.png" alt="Logo Padaria" class="h-16 md:h-20 w-auto mr-2"> <!-- Tamanho ajustável -->
-            <span class="text-amber-800 font-bold text-lg md:text-xl">Panificadora Atlanta</span> <!-- Texto responsivo -->
+            <img src="img/logo.png" alt="Logo Padaria" class="h-16 md:h-20 w-auto mr-2">
+            <span class="text-amber-800 font-bold text-lg md:text-xl drop-shadow-sm">Panificadora Atlanta</span>
         </div>
 
-        <nav class="hidden md:flex space-x-4">
+        <nav class="hidden md:flex space-x-6">
             <a href="#inicio" class="text-amber-800 hover:text-amber-600 font-medium">Início</a>
             <a href="#kits" class="text-amber-800 hover:text-amber-600 font-medium">Kit Festa</a>
             <a href="#contato" class="text-amber-800 hover:text-amber-600 font-medium">Contato</a>
         </nav>
 
-        <button class="md:hidden text-amber-800 text-2xl focus:outline-none" id="menu-toggle" aria-label="Menu">
+        <button class="md:hidden text-amber-800 text-2xl focus:outline-none" id="menu-toggle">
             <i class="fas fa-bars"></i>
         </button>
     </div>
 
-    <!-- Mobile menu melhorado -->
-    <div class="md:hidden hidden bg-white w-full px-4 py-2 shadow-md" id="mobile-menu">
-        <a href="#inicio" class="block py-2 text-amber-800 hover:text-amber-600 border-b border-amber-100">Início</a>
-        <a href="#kits" class="block py-2 text-amber-800 hover:text-amber-600 border-b border-amber-100">Kit Festa</a>
-        <a href="#contato" class="block py-2 text-amber-800 hover:text-amber-600">Contato</a>
+    <!-- Menu mobile com semi-transparência -->
+    <div class="md:hidden hidden backdrop-blur-md bg-white/90 w-full px-4 py-2" id="mobile-menu">
+        <a href="#inicio" class="block py-3 text-amber-800 hover:text-amber-600 border-b border-amber-100/50">Início</a>
+        <a href="#kits" class="block py-3 text-amber-800 hover:text-amber-600 border-b border-amber-100/50">Kit Festa</a>
+        <a href="#contato" class="block py-3 text-amber-800 hover:text-amber-600">Contato</a>
     </div>
 </header>
 
@@ -981,4 +981,5 @@ body {
         window.addEventListener('scroll', animateOnScroll);
     </script>
 </body>
+
 </html>
