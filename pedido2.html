@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pedido Panificadora - Kit Médio (2 sabores)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffbeb;
+    }
+    
+    .step {
+      display: none;
+      margin-top: 20px;
+    }
+    
+    .step.active {
+      display: block;
+    }
+    
+    button.option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 2px solid #d97706;
+      background: white;
+      color: #92400e;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    button.option:hover {
+      background-color: #d97706;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .count {
+      background: #d97706;
+      color: white;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      font-weight: 700;
+    }
+    
+    #btn-next, #btn-whatsapp {
+      margin-top: 20px;
+      background-color: #d97706;
+      border: none;
+      color: white;
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      display: none;
+    }
+    
+    #btn-whatsapp {
+      background-color: #25D366;
+    }
+    
+    #btn-next:hover {
+      background-color: #b45309;
+      transform: translateY(-2px);
+    }
+    
+    #btn-whatsapp.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+    
+    #btn-whatsapp:not(.enabled) {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    
+    #btn-whatsapp.enabled:hover {
+      background-color: #128C7E;
+      transform: translateY(-2px);
+    }
+    
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .logo {
+      height: 60px;
+      width: auto;
+    }
+    
+    .back-btn {
+      background-color: #d97706;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .back-btn:hover {
+      background-color: #b45309;
+      transform: translateY(-2px);
+    }
+    
+    h2 {
+      color: #92400e;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      transition: border-color 0.3s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #d97706;
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #92400e;
+    }
+    
+    .required {
+      color: #ef4444;
+    }
+    
+    .aviso-pagamento {
+      margin: 15px 0;
+      padding: 12px;
+      background-color: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      color: #92400e;
+      font-size: 14px;
+    }
+    
+    #checkbox-container {
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    #checkbox-container input {
+      width: auto;
+    }
+    
+    #checkbox-container label {
+      margin: 0;
+      font-weight: 400;
+    }
+    
+    #info-selecionados {
+      margin-top: 12px;
+      padding: 8px;
+      background-color: #fef3c7;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 500;
+      color: #92400e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="img/logo.png" alt="Logo Panificadora Atlanta" class="logo">
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Voltar
+      </a>
+    </div>
+
+    <h2>Monte seu pedido - Kit Médio</h2>
+
+    <div id="step1" class="step active">
+      <p class="text-amber-800 mb-4">Escolha a cor do bolo:</p>
+      <button class="option" data-value="Branco">Branco</button>
+      <button class="option" data-value="Chocolate">Chocolate</button>
+      <button class="option" data-value="Colorido">Colorido</button>
+    </div>
+
+    <div id="step2" class="step">
+      <p class="text-amber-800 mb-4">Escolha o recheio do bolo:</p>
+      <button class="option" data-value="Doce de Leite">Doce de Leite</button>
+      <button class="option" data-value="Morango">Morango</button>
+      <button class="option" data-value="Chocolate">Chocolate</button>
+    </div>
+
+    <div id="step3" class="step">
+      <p class="text-amber-800 mb-4">Escolha até <strong>2</strong> sabores de salgado (pode repetir):</p>
+      <button class="option" data-value="Frango">Frango <span class="count">0</span></button>
+      <button class="option" data-value="Queijo">Queijo <span class="count">0</span></button>
+      <button class="option" data-value="Carne">Carne <span class="count">0</span></button>
+      <button class="option" data-value="Presunto">Presunto <span class="count">0</span></button>
+      <button class="option" data-value="Palmito">Palmito <span class="count">0</span></button>
+      <div id="info-selecionados">Selecionados: 0 / 2</div>
+    </div>
+
+    <div id="form-info" class="step">
+      <h3 class="text-amber-800 font-bold mb-4">Informações do pedido</h3>
+      
+      <label for="nome">Nome completo <span class="required">*</span></label>
+      <input type="text" id="nome" required placeholder="Seu nome completo" />
+
+      <label for="nome-buscador">Nome de quem vai buscar (opcional)</label>
+      <input type="text" id="nome-buscador" placeholder="Nome da pessoa que irá retirar" />
+
+      <label for="data-retirada">Data da retirada <span class="required">*</span></label>
+      <input type="date" id="data-retirada" required />
+
+      <label for="hora-retirada">Horário da retirada <span class="required">*</span></label>
+      <input type="time" id="hora-retirada" required />
+
+      <label for="telefone">Número de telefone <span class="required">*</span></label>
+      <input type="tel" id="telefone" required placeholder="(99) 99999-9999" />
+
+      <!-- Adicione isso antes do checkbox de confirmação de pagamento -->
+        <label for="observacoes">Observações adicionais (opcional)</label>
+        <textarea id="observacoes" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Alguma observação especial sobre seu pedido"></textarea>
+
+      <div class="aviso-pagamento">
+        <i class="fas fa-info-circle mr-2"></i>
+        Para iniciar a produção será necessário pagar metade do valor do kit via link ou PIX.
+      </div>
+
+      <div id="checkbox-container">
+        <input type="checkbox" id="confirm-pagamento" />
+        <label for="confirm-pagamento">
+          Estou ciente e pagarei metade do valor para iniciar a produção (via link ou PIX).
+        </label>
+      </div>
+    </div>
+
+    <button id="btn-next">Próximo</button>
+    <button id="btn-whatsapp" disabled>
+      <i class="fab fa-whatsapp mr-2"></i> Enviar pedido pelo WhatsApp
+    </button>
+  </div>
+
+  <script>
+    const steps = ['step1','step2','step3','form-info'];
+    let currentStep = 0;
+    const selections = { salgados: {} };
+    let totalSelected = 0;
+    const maxSelections = 2;
+
+    const btnNext = document.getElementById('btn-next');
+    const btnWhats = document.getElementById('btn-whatsapp');
+    const infoSelecionados = document.getElementById('info-selecionados');
+
+    function showStep(index){
+      steps.forEach((id,i) => document.getElementById(id).classList.toggle('active', i === index));
+      btnNext.style.display = (index === 0 || index === 1) ? 'block' : 'none';
+      btnWhats.style.display = (index === steps.length - 1) ? 'block' : 'none';
+      if(index === steps.length - 1) validateFormFields();
+    }
+
+    function nextStep(){
+      if(currentStep < steps.length - 1){
+        currentStep++;
+        showStep(currentStep);
+      }
+    }
+
+    // Step 1 e 2 - seleção simples
+    document.querySelectorAll('#step1 .option').forEach(btn =>
+      btn.addEventListener('click', () => { selections.cor = btn.dataset.value; nextStep(); })
+    );
+    document.querySelectorAll('#step2 .option').forEach(btn =>
+      btn.addEventListener('click', () => { selections.recheio = btn.dataset.value; nextStep(); })
+    );
+
+    // Step 3 - múltiplas seleções com contadores
+    function atualizaInfoSelecionados(){
+      infoSelecionados.textContent = `Selecionados: ${totalSelected} / ${maxSelections}`;
+    }
+
+    document.querySelectorAll('#step3 .option').forEach(btn => {
+      const counterEl = btn.querySelector('.count');
+      counterEl.textContent = '0';
+      btn.addEventListener('click', () => {
+        if(totalSelected < maxSelections){
+          const sabor = btn.dataset.value;
+          selections.salgados[sabor] = (selections.salgados[sabor] || 0) + 1;
+          totalSelected++;
+          counterEl.textContent = selections.salgados[sabor];
+          atualizaInfoSelecionados();
+          if(totalSelected === maxSelections) btnNext.style.display = 'block';
+        } else {
+          alert(`Você já selecionou ${maxSelections} sabores. Se quiser mudar, recarregue a página.`);
+        }
+      });
+    });
+
+    btnNext.addEventListener('click', () => nextStep());
+
+    // Validação final
+    const campoNome = document.getElementById('nome');
+    const campoData = document.getElementById('data-retirada');
+    const campoHora = document.getElementById('hora-retirada');
+    const campoTel = document.getElementById('telefone');
+    const checkbox = document.getElementById('confirm-pagamento');
+
+    function validaTelefone(t){
+      return t.replace(/[^\d]/g,'').length >= 10;
+    }
+
+    function validateFormFields(){
+      const nomeOk = campoNome.value.trim() !== '';
+      const dataOk = campoData.value.trim() !== '';
+      const horaOk = campoHora.value.trim() !== '';
+      const telOk = validaTelefone(campoTel.value.trim());
+      const pagoOk = checkbox.checked;
+      const salgadosOk = totalSelected === maxSelections;
+      
+      if(nomeOk && dataOk && horaOk && telOk && pagoOk && salgadosOk){
+        btnWhats.disabled = false;
+        btnWhats.classList.add('enabled');
+      } else {
+        btnWhats.disabled = true;
+        btnWhats.classList.remove('enabled');
+      }
+    }
+
+    [campoNome, campoData, campoHora, campoTel, checkbox].forEach(el => {
+      el.addEventListener('input', validateFormFields);
+      el.addEventListener('change', validateFormFields);
+    });
+
+    // Envio pelo WhatsApp
+    btnWhats.addEventListener('click', () => {
+  if(btnWhats.disabled) return;
+
+  const nome = campoNome.value.trim();
+  const nomeBuscador = document.getElementById('nome-buscador').value.trim();
+  const data = campoData.value.trim();
+  const hora = campoHora.value.trim();
+  const telefoneCliente = campoTel.value.trim();
+  const observacoes = document.getElementById('observacoes').value.trim();
+
+  // Formatar data
+  let dataFormat = data;
+  if(data.includes('-')){
+    const parts = data.split('-');
+    if(parts.length === 3) dataFormat = `${parts[2]}/${parts[1]}/${parts[0]}`;
+  }
+
+  // Montar lista de salgados
+  const salgadosLista = [];
+  for(const sabor in selections.salgados){
+    const qtd = selections.salgados[sabor];
+    for(let i=0;i<qtd;i++) salgadosLista.push(sabor);
+  }
+
+  const msg =
+    `Olá! Quero fazer o pedido do Kit Médio:\n` +
+    `- Cor do bolo: ${selections.cor}\n` +
+    `- Recheio do bolo: ${selections.recheio}\n` +
+    `- Sabores do salgado: ${salgadosLista.join(', ')}\n\n` +
+    `Nome completo: ${nome}\n` +
+    (nomeBuscador ? `Nome de quem vai buscar: ${nomeBuscador}\n` : '') +
+    `Data da retirada: ${dataFormat}\n` +
+    `Horário da retirada: ${hora}\n` +
+    `Telefone: ${telefoneCliente}\n` +
+    (observacoes ? `Observações: ${observacoes}\n\n` : '\n') +
+    `Estou ciente que pagarei metade do valor do kit via link ou PIX para iniciar a produção.`;
+
+  const phone = '556133335341';
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+});
+
+    // Inicialização
+    atualizaInfoSelecionados();
+    showStep(currentStep);
+  </script>
+</body>
+</html>

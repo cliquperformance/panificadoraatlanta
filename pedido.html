@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pedido Panificadora - Formulário Completo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffbeb; /* amber-50 */
+    }
+    
+    .step {
+      display: none;
+      margin-top: 20px;
+    }
+    
+    .step.active {
+      display: block;
+    }
+    
+    button.option {
+      display: block;
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 2px solid #d97706; /* amber-600 */
+      background: white;
+      color: #92400e; /* amber-800 */
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    button.option:hover {
+      background-color: #d97706; /* amber-600 */
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    #btn-whatsapp {
+      margin-top: 20px;
+      background-color: #25D366;
+      border: none;
+      color: white;
+      padding: 15px;
+      width: 100%;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: not-allowed;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+    
+    #btn-whatsapp.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+    
+    #btn-whatsapp.enabled:hover {
+      background-color: #128C7E;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .logo {
+      height: 60px;
+      width: auto;
+    }
+    
+    .back-btn {
+      background-color: #d97706; /* amber-600 */
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .back-btn:hover {
+      background-color: #b45309; /* amber-700 */
+      transform: translateY(-2px);
+    }
+    
+    h2 {
+      color: #92400e; /* amber-800 */
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      transition: border-color 0.3s;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #d97706; /* amber-600 */
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #92400e; /* amber-800 */
+    }
+    
+    .required {
+      color: #ef4444; /* red-500 */
+    }
+    
+    .aviso-pagamento {
+      margin: 15px 0;
+      padding: 12px;
+      background-color: #fffbeb; /* amber-50 */
+      border: 1px solid #fcd34d; /* amber-300 */
+      border-radius: 8px;
+      color: #92400e; /* amber-800 */
+      font-size: 14px;
+    }
+    
+    #checkbox-container {
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    #checkbox-container input {
+      width: auto;
+    }
+    
+    #checkbox-container label {
+      margin: 0;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="img/logo.png" alt="Logo Panificadora Atlanta" class="logo">
+      <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+        Voltar
+      </a>
+    </div>
+
+    <h2>Monte seu pedido</h2>
+
+    <div id="step1" class="step active">
+      <p class="text-amber-800 mb-4">Escolha a cor do bolo:</p>
+      <button class="option" data-value="Branco">Branco</button>
+      <button class="option" data-value="Chocolate">Chocolate</button>
+      <button class="option" data-value="Colorido">Colorido</button>
+    </div>
+
+    <div id="step2" class="step">
+      <p class="text-amber-800 mb-4">Escolha o recheio do bolo:</p>
+      <button class="option" data-value="Doce de Leite">Doce de Leite</button>
+      <button class="option" data-value="Morango">Morango</button>
+      <button class="option" data-value="Chocolate">Chocolate</button>
+    </div>
+
+    <div id="step3" class="step">
+      <p class="text-amber-800 mb-4">Escolha o sabor do salgado:</p>
+      <button class="option" data-value="Frango">Frango</button>
+      <button class="option" data-value="Queijo">Queijo</button>
+      <button class="option" data-value="Carne">Carne</button>
+    </div>
+
+    <div id="form-info" class="step">
+      <h3 class="text-amber-800 font-bold mb-4">Informações para o pedido</h3>
+      
+      <label for="nome">Nome completo <span class="required">*</span></label>
+      <input type="text" id="nome" required placeholder="Seu nome completo" />
+
+      <label for="nome-buscador">Nome de quem vai buscar (opcional)</label>
+      <input type="text" id="nome-buscador" placeholder="Nome da pessoa que irá retirar" />
+
+      <label for="data-retirada">Data da retirada <span class="required">*</span></label>
+      <input type="date" id="data-retirada" required />
+
+      <label for="hora-retirada">Horário da retirada <span class="required">*</span></label>
+      <input type="time" id="hora-retirada" required />
+
+      <label for="telefone">Número de telefone <span class="required">*</span></label>
+      <input type="tel" id="telefone" required placeholder="(99) 99999-9999" />
+
+      <!-- Adicione isso antes do checkbox de confirmação de pagamento -->
+        <label for="observacoes">Observações adicionais (opcional)</label>
+        <textarea id="observacoes" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" placeholder="Alguma observação especial sobre seu pedido"></textarea>
+
+      <div class="aviso-pagamento">
+        <i class="fas fa-info-circle mr-2"></i>
+        Para iniciar a produção será necessário pagar metade do valor do kit via link ou PIX.
+      </div>
+
+      <div id="checkbox-container">
+        <input type="checkbox" id="confirm-pagamento" />
+        <label for="confirm-pagamento">
+          Estou ciente que para iniciar a produção será necessário pagar metade do valor do kit, via link ou PIX.
+        </label>
+      </div>
+    </div>
+
+    <button id="btn-whatsapp" disabled>
+      <i class="fab fa-whatsapp mr-2"></i> Enviar pedido pelo WhatsApp
+    </button>
+  </div>
+
+  <script>
+    const steps = ['step1', 'step2', 'step3', 'form-info'];
+    let currentStep = 0;
+    const selections = {};
+
+    function showStep(index) {
+      steps.forEach((id, i) => {
+        document.getElementById(id).classList.toggle('active', i === index);
+      });
+      
+      if (index === steps.length - 1) {
+        document.getElementById('btn-whatsapp').style.display = 'block';
+      } else {
+        document.getElementById('btn-whatsapp').style.display = 'none';
+      }
+    }
+
+    function nextStep() {
+      currentStep++;
+      if (currentStep < steps.length) {
+        showStep(currentStep);
+      }
+    }
+
+    document.querySelectorAll('.step:not(#form-info) .option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (currentStep === 0) selections.cor = btn.dataset.value;
+        else if (currentStep === 1) selections.recheio = btn.dataset.value;
+        else if (currentStep === 2) selections.salgado = btn.dataset.value;
+        nextStep();
+      });
+    });
+
+    // Validação e habilitação do botão enviar
+    const btnEnviar = document.getElementById('btn-whatsapp');
+    const checkbox = document.getElementById('confirm-pagamento');
+
+    function validaCampos() {
+      const nome = document.getElementById('nome').value.trim();
+      const data = document.getElementById('data-retirada').value;
+      const hora = document.getElementById('hora-retirada').value;
+      const tel = document.getElementById('telefone').value.trim();
+
+      if (nome && data && hora && tel && checkbox.checked) {
+        btnEnviar.disabled = false;
+        btnEnviar.classList.add('enabled');
+      } else {
+        btnEnviar.disabled = true;
+        btnEnviar.classList.remove('enabled');
+      }
+    }
+
+    document.getElementById('nome').addEventListener('input', validaCampos);
+    document.getElementById('data-retirada').addEventListener('input', validaCampos);
+    document.getElementById('hora-retirada').addEventListener('input', validaCampos);
+    document.getElementById('telefone').addEventListener('input', validaCampos);
+    checkbox.addEventListener('change', validaCampos);
+
+    btnEnviar.addEventListener('click', () => {
+    if (btnEnviar.disabled) return;
+
+    const nome = document.getElementById('nome').value.trim();
+    const nomeBuscador = document.getElementById('nome-buscador').value.trim();
+    const data = document.getElementById('data-retirada').value;
+    const hora = document.getElementById('hora-retirada').value;
+    const tel = document.getElementById('telefone').value.trim();
+    const observacoes = document.getElementById('observacoes').value.trim();
+
+    const msg = `Olá! Quero fazer o pedido:\n` +
+              `- Cor do bolo: ${selections.cor}\n` +
+              `- Recheio do bolo: ${selections.recheio}\n` +
+              `- Sabor do salgado: ${selections.salgado}\n\n` +
+              `Nome completo: ${nome}\n` +
+              (nomeBuscador ? `Nome de quem vai buscar: ${nomeBuscador}\n` : '') +
+              `Data da retirada: ${data}\n` +
+              `Horário da retirada: ${hora}\n` +
+              `Telefone: ${tel}\n` +
+              (observacoes ? `Observações: ${observacoes}\n\n` : '\n') +
+              `Estou ciente que pagarei metade do valor do kit via link ou PIX para iniciar a produção.`;
+
+  const phone = '5561992096078';
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+});
+
+    showStep(currentStep);
+  </script>
+</body>
+</html>
