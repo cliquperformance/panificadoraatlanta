@@ -72,36 +72,33 @@
     </style>
 </head>
 <body class="bg-amber-50 pt-24">
-    <!-- Header -->
-    <header class="fixed w-full bg-white shadow-md z-50 top-0 left-0">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="img/logo.png" alt="Logo Padaria" class="logo h-20 w-auto mr-2">
-                <span class="text-amber-800 font-bold text-xl">Panificadora Atlanta</span>
-            </div>
-    
-            <nav class="hidden md:flex space-x-8">
-                <a href="#inicio" class="text-amber-800 hover:text-amber-600 font-medium">Início</a>
-                <a href="#kits" class="text-amber-800 hover:text-amber-600 font-medium">Kit Festa</a>
-                <a href="#contato" class="text-amber-800 hover:text-amber-600 font-medium">Contato</a>
-            </nav>
-    
-        <a href="https://wa.me/5511999999999" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-full font-medium flex items-center">
-            <i class="fab fa-whatsapp mr-2"></i> Peça pelo WhatsApp
-        </a>
-    
-            <button class="md:hidden text-amber-800 text-2xl" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </button>
+    <header class="fixed w-full bg-white shadow-md z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <div class="flex items-center">
+            <img src="img/logo.png" alt="Logo Padaria" class="h-20 w-auto mr-2">
+            <span class="text-amber-800 font-bold text-xl">Panificadora Atlanta</span>
         </div>
     
-    <!-- Mobile menu -->
-        <div class="md:hidden hidden bg-white w-full px-4 py-2 shadow-md" id="mobile-menu">
-            <a href="#inicio" class="block py-2 text-amber-800 hover:text-amber-600">Início</a>
-            <a href="#kits" class="block py-2 text-amber-800 hover:text-amber-600">Kit Festa</a>
-            <a href="#contato" class="block py-2 text-amber-800 hover:text-amber-600">Contato</a>
-        </div>
-    </header>
+        <nav class="hidden md:flex space-x-4"> <!-- Reduzi o espaçamento entre links -->
+            <a href="#inicio" class="text-amber-800 hover:text-amber-600 font-medium">Início</a>
+            <a href="#kits" class="text-amber-800 hover:text-amber-600 font-medium">Kit Festa</a>
+            <a href="#contato" class="text-amber-800 hover:text-amber-600 font-medium">Contato</a>
+        </nav>
+    
+        <!-- REMOVI O BOTÃO "PEÇA PELO WHATSAPP" -->
+    
+        <button class="md:hidden text-amber-800 text-2xl" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    
+    <!-- Mobile menu - Atualizei as cores para combinar -->
+    <div class="md:hidden hidden bg-white w-full px-4 py-2 shadow-md" id="mobile-menu">
+        <a href="#inicio" class="block py-2 text-amber-800 hover:text-amber-600">Início</a>
+        <a href="#kits" class="block py-2 text-amber-800 hover:text-amber-600">Kit Festa</a>
+        <a href="#contato" class="block py-2 text-amber-800 hover:text-amber-600">Contato</a>
+    </div>
+</header>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero-section h-screen flex items-center pt-16">
