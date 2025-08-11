@@ -69,33 +69,41 @@
             width: 100%;
             text-align: center;
         }
+/* Adicione isso ao seu CSS existente */
+body {
+    padding-top: 80px; /* Ajuste conforme a altura do seu header */
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 70px; /* Valor menor para mobile se necessário */
+    }
+}
     </style>
 </head>
 <body class="bg-amber-50 pt-24">
-    <header class="fixed w-full bg-white shadow-md z-50">
+    <header class="fixed w-full bg-white shadow-md z-50 top-0 left-0">
     <div class="container mx-auto px-4 py-3 flex justify-between items-center">
         <div class="flex items-center">
-            <img src="img/logo.png" alt="Logo Padaria" class="h-20 w-auto mr-2">
-            <span class="text-amber-800 font-bold text-xl">Panificadora Atlanta</span>
+            <img src="img/logo.png" alt="Logo Padaria" class="h-16 md:h-20 w-auto mr-2"> <!-- Tamanho ajustável -->
+            <span class="text-amber-800 font-bold text-lg md:text-xl">Panificadora Atlanta</span> <!-- Texto responsivo -->
         </div>
-    
-        <nav class="hidden md:flex space-x-4"> <!-- Reduzi o espaçamento entre links -->
+
+        <nav class="hidden md:flex space-x-4">
             <a href="#inicio" class="text-amber-800 hover:text-amber-600 font-medium">Início</a>
             <a href="#kits" class="text-amber-800 hover:text-amber-600 font-medium">Kit Festa</a>
             <a href="#contato" class="text-amber-800 hover:text-amber-600 font-medium">Contato</a>
         </nav>
-    
-        <!-- REMOVI O BOTÃO "PEÇA PELO WHATSAPP" -->
-    
-        <button class="md:hidden text-amber-800 text-2xl" id="menu-toggle">
+
+        <button class="md:hidden text-amber-800 text-2xl focus:outline-none" id="menu-toggle" aria-label="Menu">
             <i class="fas fa-bars"></i>
         </button>
     </div>
-    
-    <!-- Mobile menu - Atualizei as cores para combinar -->
+
+    <!-- Mobile menu melhorado -->
     <div class="md:hidden hidden bg-white w-full px-4 py-2 shadow-md" id="mobile-menu">
-        <a href="#inicio" class="block py-2 text-amber-800 hover:text-amber-600">Início</a>
-        <a href="#kits" class="block py-2 text-amber-800 hover:text-amber-600">Kit Festa</a>
+        <a href="#inicio" class="block py-2 text-amber-800 hover:text-amber-600 border-b border-amber-100">Início</a>
+        <a href="#kits" class="block py-2 text-amber-800 hover:text-amber-600 border-b border-amber-100">Kit Festa</a>
         <a href="#contato" class="block py-2 text-amber-800 hover:text-amber-600">Contato</a>
     </div>
 </header>
